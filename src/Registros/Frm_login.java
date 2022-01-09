@@ -5,6 +5,9 @@
  */
 package Registros;
 
+import Metodos_SQL.Metodos_SQL;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author copar
@@ -16,7 +19,10 @@ public class Frm_login extends javax.swing.JFrame {
      */
     public Frm_login() {
         initComponents();
+        setLocationRelativeTo(null);
+
     }
+    Metodos_SQL metodos = new Metodos_SQL();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -59,8 +65,18 @@ public class Frm_login extends javax.swing.JFrame {
         });
 
         jButton1.setText("ENTRAR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Registrarse");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -144,6 +160,37 @@ public class Frm_login extends javax.swing.JFrame {
     private void txtContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraseñaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtContraseñaActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String busqueda_usuario = metodos.buscarUsuarioRegistrado(txtCorreo.getText(), txtContraseña.getText());
+
+        if (txtCorreo.getText().equals("Gerente") && txtContraseña.getText().equals("gerente123")) {
+            JOptionPane.showMessageDialog(this, "Bienvenido iniciaste sesión como (Gerente)");
+            Frm_registro_personal_medico ventana = new Frm_registro_personal_medico();
+            ventana.lblNombre.setText("Gerente");
+            ventana.setVisible(true);
+            this.dispose();
+
+        } else if (busqueda_usuario.equals("Usuario Encontrado")) {
+            String busqueda_nombre = metodos.buscarNombre(txtCorreo.getText());
+            JOptionPane.showMessageDialog(this, "Bienvenido (a)\n" + busqueda_nombre);
+            Frm_registro_personal_medico ventana = new Frm_registro_personal_medico();
+
+            ventana.lblNombre.setText(busqueda_nombre);
+            ventana.setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Usuario no registrado,favor registrarse");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        Frm_registrar_usuarios ventana=new Frm_registrar_usuarios();
+        ventana.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
