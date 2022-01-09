@@ -5,17 +5,31 @@
  */
 package Registros;
 
+import Metodos_SQL.ConexionBD;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author MEGARED
  */
 public class Frm_registro_personal_medico extends javax.swing.JFrame {
 
+    ConexionBD cc = new ConexionBD();
+    Connection con = cc.conectar();
+
     /**
      * Creates new form Frm_registro_personal_medico
      */
     public Frm_registro_personal_medico() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        mostrarDatos();
     }
 
     /**
@@ -41,7 +55,7 @@ public class Frm_registro_personal_medico extends javax.swing.JFrame {
         txtNombre = new javax.swing.JTextField();
         txtApellido = new javax.swing.JTextField();
         jDateFecha = new com.toedter.calendar.JDateChooser();
-        cdSexo = new javax.swing.JComboBox<>();
+        cbSexo = new javax.swing.JComboBox<>();
         txtDireccion = new javax.swing.JTextField();
         txtNacionalidad = new javax.swing.JTextField();
         txtEspecialidad = new javax.swing.JTextField();
@@ -56,6 +70,8 @@ public class Frm_registro_personal_medico extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
+        lblNombre = new javax.swing.JLabel();
+        lblNombres = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 51, 255));
@@ -86,15 +102,40 @@ public class Frm_registro_personal_medico extends javax.swing.JFrame {
             }
         });
 
-        cdSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Femenino" }));
+        cbSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Femenino" }));
+        cbSexo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbSexoActionPerformed(evt);
+            }
+        });
 
         btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         btnNuevo.setText("Nuevo");
+        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoActionPerformed(evt);
+            }
+        });
 
         btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
 
         tablaRegistro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -107,6 +148,11 @@ public class Frm_registro_personal_medico extends javax.swing.JFrame {
 
             }
         ));
+        tablaRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaRegistroMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablaRegistro);
 
         jLabel11.setText("Buscar:");
@@ -147,7 +193,7 @@ public class Frm_registro_personal_medico extends javax.swing.JFrame {
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(cdSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(cbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(txtEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGroup(jPanel2Layout.createSequentialGroup()
                                             .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -171,15 +217,19 @@ public class Frm_registro_personal_medico extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(61, 61, 61)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel12))
+                        .addGap(37, 37, 37)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel11)
-                                .addGap(107, 107, 107)
-                                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel12)))
+                                .addComponent(lblNombres)
+                                .addGap(40, 40, 40)
+                                .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(90, 90, 90)
                         .addComponent(jLabel1)))
-                .addGap(36, 36, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,11 +242,8 @@ public class Frm_registro_personal_medico extends javax.swing.JFrame {
                     .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addComponent(jLabel3)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(btnEliminar)
                         .addGap(15, 15, 15)))
@@ -219,7 +266,7 @@ public class Frm_registro_personal_medico extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(cdSexo))
+                    .addComponent(cbSexo))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(27, 27, 27)
@@ -247,8 +294,16 @@ public class Frm_registro_personal_medico extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addComponent(jLabel12))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel12)
+                            .addComponent(lblNombres)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblNombre)
+                        .addContainerGap())))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -271,9 +326,162 @@ public class Frm_registro_personal_medico extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscarActionPerformed
 
+    private void tablaRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaRegistroMouseClicked
+        int filaSeleccionada = tablaRegistro.rowAtPoint(evt.getPoint());
+
+        txtCedula.setText(tablaRegistro.getValueAt(filaSeleccionada, 0).toString());
+        txtNombre.setText(tablaRegistro.getValueAt(filaSeleccionada, 1).toString());
+        txtApellido.setText(tablaRegistro.getValueAt(filaSeleccionada, 2).toString());
+        ((JTextField) jDateFecha.getDateEditor().getUiComponent()).setText((String) tablaRegistro.getValueAt(filaSeleccionada, 3).toString());
+        cbSexo.setSelectedItem(tablaRegistro.getValueAt(filaSeleccionada, 4));
+        txtDireccion.setText(tablaRegistro.getValueAt(filaSeleccionada, 5).toString());
+        txtNacionalidad.setText(tablaRegistro.getValueAt(filaSeleccionada, 6).toString());
+        txtEspecialidad.setText(tablaRegistro.getValueAt(filaSeleccionada, 7).toString());
+        txtExperienciaLaboral.setText(tablaRegistro.getValueAt(filaSeleccionada, 8).toString());
+    }//GEN-LAST:event_tablaRegistroMouseClicked
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        ActualizarDatos();
+        limpiarCajas();
+        mostrarDatos();
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        insertarDatos();
+        limpiarCajas();
+        mostrarDatos();
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+        limpiarCajas();
+    }//GEN-LAST:event_btnNuevoActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        eliminarRegistros();
+        mostrarDatos();
+        limpiarCajas();
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void cbSexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSexoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbSexoActionPerformed
+
     private void txtCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedulaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCedulaActionPerformed
+    public void limpiarCajas() {
+
+        txtCedula.setText("");
+        txtNombre.setText("");
+        txtApellido.setText("");
+        jDateFecha.setDate(null);
+        cbSexo.setSelectedItem(null);
+        txtDireccion.setText("");
+        txtNacionalidad.setText("");
+        txtEspecialidad.setText("");
+        txtExperienciaLaboral.setText("");
+    }
+
+    public void mostrarDatos() {
+
+        String[] titulos = {"Cédula", "Nombre", "Apellido", "FechaNacimiento", "Sexo", "Dirección", "Nacionalidad", "Especialidad", "ExperienciaLaboral"};
+        String[] registros = new String[9];
+        DefaultTableModel modelo = new DefaultTableModel(null, titulos);
+
+        String SQL = "select * from registro_personal_medico";
+
+        try {
+
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(SQL);
+
+            while (rs.next()) {
+                registros[0] = rs.getString("Cédula");
+                registros[1] = rs.getString("Nombre");
+                registros[2] = rs.getString("Apellido");
+                registros[3] = rs.getString("FechaNacimiento");
+                registros[4] = rs.getString("Sexo");
+                registros[5] = rs.getString("Dirección");
+                registros[6] = rs.getString("Nacionalidad");
+                registros[7] = rs.getString("Especialidad");
+                registros[8] = rs.getString("ExperienciaLaboral");
+
+                modelo.addRow(registros);
+
+            }
+            tablaRegistro.setModel(modelo);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al Mostrar Datos" + e);
+        }
+
+    }
+
+    public void insertarDatos() {
+
+        try {
+            String SQL = "insert into registro_personal_medico(Cédula,Nombre,Apellido,FechaNacimiento,Sexo,Dirección,Nacionalidad,Especialidad,ExperienciaLaboral)value(?,?,?,?,?,?,?,?,?)";
+
+            PreparedStatement pst = con.prepareStatement(SQL);
+            pst.setString(1, txtCedula.getText());
+            pst.setString(2, txtNombre.getText());
+            pst.setString(3, txtApellido.getText());
+            pst.setString(4, ((JTextField) jDateFecha.getDateEditor().getUiComponent()).getText());
+            int seleccionado = cbSexo.getSelectedIndex();
+            pst.setString(5, cbSexo.getItemAt(seleccionado));
+            pst.setString(6, txtDireccion.getText());
+            pst.setString(7, txtNacionalidad.getText());
+            pst.setString(8, txtEspecialidad.getText());
+            pst.setString(9, txtExperienciaLaboral.getText());
+
+            pst.execute();
+            JOptionPane.showMessageDialog(null, "Registro exitoso");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error de Registro" + e.getMessage());
+        }
+    }
+
+    public void ActualizarDatos() {
+
+        try {
+            String SQL = " update registro_personal_medico set Nombre=?,Apellido=?,FechaNacimiento=?,Sexo=?,Dirección=?,Nacionalidad=?,Especialidad=?,ExperienciaLaboral=? where Cédula=? ";
+            int filaSeleccionada = tablaRegistro.getSelectedRow();
+            String dao = (String) tablaRegistro.getValueAt(filaSeleccionada, 0);
+            PreparedStatement pst = con.prepareStatement(SQL);
+
+            pst.setString(1, txtNombre.getText());
+            pst.setString(2, txtApellido.getText());
+            pst.setString(3, ((JTextField) jDateFecha.getDateEditor().getUiComponent()).getText());
+            int seleccionado = cbSexo.getSelectedIndex();
+            pst.setString(4, cbSexo.getItemAt(seleccionado));
+            pst.setString(5, txtDireccion.getText());
+            pst.setString(6, txtNacionalidad.getText());
+            pst.setString(7, txtEspecialidad.getText());
+            pst.setString(8, txtExperienciaLaboral.getText());
+
+            pst.setString(9, dao);
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Registro Actualizado Exitoso");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error de Actualiación" + e.getMessage());
+        }
+    }
+
+    public void eliminarRegistros() {
+        int filaSeleccionada = tablaRegistro.getSelectedRow();
+
+        try {
+            String SQL = "delete from registro_personal_medico where Cédula=" + tablaRegistro.getValueAt(filaSeleccionada, 0);
+
+            Statement st = con.createStatement();
+            int n = st.executeUpdate(SQL);
+
+            if (n >= 0) {
+                JOptionPane.showMessageDialog(null, "Registro Eliminado");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al Eliminar Registro" + e.getMessage());
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -315,7 +523,7 @@ public class Frm_registro_personal_medico extends javax.swing.JFrame {
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;
-    private javax.swing.JComboBox<String> cdSexo;
+    private javax.swing.JComboBox<String> cbSexo;
     private com.toedter.calendar.JDateChooser jDateFecha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -331,6 +539,8 @@ public class Frm_registro_personal_medico extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblNombre;
+    public javax.swing.JLabel lblNombres;
     private javax.swing.JTable tablaRegistro;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtBuscar;
