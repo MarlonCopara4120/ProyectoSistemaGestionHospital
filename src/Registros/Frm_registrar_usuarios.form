@@ -63,14 +63,14 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="txtNombre" min="-2" pref="98" max="-2" attributes="0"/>
                                       <Component id="txtServicio" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
-                                      <Component id="txtContraseña" min="-2" pref="98" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="txtCorreo" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
-                                      <Component id="txtApellidos" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="txtContraseña" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txtCorreo" alignment="0" pref="98" max="32767" attributes="0"/>
+                                      <Component id="txtApellidos" alignment="0" pref="98" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace pref="57" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -175,8 +175,6 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtCorreo">
         </Component>
-        <Component class="javax.swing.JTextField" name="txtContrase&#xf1;a">
-        </Component>
         <Component class="javax.swing.JButton" name="btnGuardar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Guardar"/>
@@ -192,6 +190,8 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegresarActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JPasswordField" name="txtContrase&#xf1;a">
         </Component>
       </SubComponents>
     </Container>
