@@ -5,6 +5,12 @@
  */
 package Registros;
 
+import Metodos_SQL.Metodos_SQL;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Acer
@@ -16,7 +22,9 @@ public class Frm_registrar_usuarios extends javax.swing.JFrame {
      */
     public Frm_registrar_usuarios() {
         initComponents();
+        setLocationRelativeTo(null);
     }
+    Metodos_SQL metodos = new Metodos_SQL();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -72,8 +80,18 @@ public class Frm_registrar_usuarios extends javax.swing.JFrame {
         });
 
         btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -164,6 +182,29 @@ public class Frm_registrar_usuarios extends javax.swing.JFrame {
     private void txtApellidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtApellidosActionPerformed
+
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        // TODO add your handling code here:
+        Frm_login ventana = new Frm_login();
+        ventana.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // TODO add your handling code here:
+        try {
+
+            int i = metodos.guardar(txtNombre.getText(), txtApellidos.getText(), txtServicio.getText(), txtCorreo.getText(), txtContraseña.getText());
+            if (i > 0) {
+                JOptionPane.showMessageDialog(this, "Datos Guardados Correctamente");
+
+            } else {
+                JOptionPane.showMessageDialog(this, "No se pudo guardar los datos");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Frm_registrar_usuarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
      * @param args the command line arguments
