@@ -168,7 +168,7 @@ public class Frm_login extends javax.swing.JFrame {
         if (txtCorreo.getText().equals("Gerente") && txtContraseña.getText().equals("gerente123")) {
             JOptionPane.showMessageDialog(this, "Bienvenido iniciaste sesión como (Gerente)");
             Frm_registro_personal_medico ventana = new Frm_registro_personal_medico();
-            ventana.lblNombre.setText("Gerente");
+            ventana.lblNombres.setText("Gerente");
             ventana.setVisible(true);
             this.dispose();
 
@@ -177,7 +177,7 @@ public class Frm_login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Bienvenido (a)\n" + busqueda_nombre);
             Frm_registro_personal_medico ventana = new Frm_registro_personal_medico();
 
-            ventana.lblNombre.setText(busqueda_nombre);
+            ventana.lblNombres.setText(busqueda_nombre);
             ventana.setVisible(true);
             this.dispose();
         } else {
