@@ -46,7 +46,6 @@ public class Frm_registro_personal_medico extends javax.swing.JFrame {
         txtCedula = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
         txtApellido = new javax.swing.JTextField();
-        jDateFecha = new com.toedter.calendar.JDateChooser();
         cbSexo = new javax.swing.JComboBox<>();
         txtDireccion = new javax.swing.JTextField();
         txtNacionalidad = new javax.swing.JTextField();
@@ -64,6 +63,7 @@ public class Frm_registro_personal_medico extends javax.swing.JFrame {
         txtBuscar = new javax.swing.JTextField();
         lblNombre = new javax.swing.JLabel();
         lblNombres = new javax.swing.JLabel();
+        jDateFecha = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 51, 255));
@@ -93,8 +93,6 @@ public class Frm_registro_personal_medico extends javax.swing.JFrame {
                 txtCedulaActionPerformed(evt);
             }
         });
-
-        jDateFecha.setDateFormatString("yyyy/MM/dd");
 
         cbSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Femenino" }));
         cbSexo.addActionListener(new java.awt.event.ActionListener() {
@@ -162,6 +160,12 @@ public class Frm_registro_personal_medico extends javax.swing.JFrame {
             }
         });
 
+        jDateFecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jDateFechaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -198,14 +202,14 @@ public class Frm_registro_personal_medico extends javax.swing.JFrame {
                                             .addComponent(btnEliminar))
                                         .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGap(315, 315, 315)
+                                        .addComponent(jDateFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(111, 111, 111)
                                         .addComponent(btnGuardar))
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(111, 111, 111)
                                         .addComponent(btnActualizar))
                                     .addComponent(txtNacionalidad, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jDateFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtExperienciaLaboral, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 654, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -261,10 +265,10 @@ public class Frm_registro_personal_medico extends javax.swing.JFrame {
                         .addGap(27, 27, 27)
                         .addComponent(btnGuardar))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(7, 7, 7)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jDateFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))))
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(jDateFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(23, 23, 23)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -341,7 +345,8 @@ public class Frm_registro_personal_medico extends javax.swing.JFrame {
         txtCedula.setText(tablaRegistro.getValueAt(filaSeleccionada, 0).toString());
         txtNombre.setText(tablaRegistro.getValueAt(filaSeleccionada, 1).toString());
         txtApellido.setText(tablaRegistro.getValueAt(filaSeleccionada, 2).toString());
-        ((JTextField) jDateFecha.getDateEditor().getUiComponent()).setText((String) tablaRegistro.getValueAt(filaSeleccionada, 3).toString());
+          jDateFecha.setText(tablaRegistro.getValueAt(filaSeleccionada, 3).toString());
+      //  ((JTextField) jDateFecha.getDateEditor().getUiComponent()).setText((String) tablaRegistro.getValueAt(filaSeleccionada, 3).toString());
         cbSexo.setSelectedItem(tablaRegistro.getValueAt(filaSeleccionada, 4));
         txtDireccion.setText(tablaRegistro.getValueAt(filaSeleccionada, 5).toString());
         txtNacionalidad.setText(tablaRegistro.getValueAt(filaSeleccionada, 6).toString());
@@ -378,12 +383,17 @@ public class Frm_registro_personal_medico extends javax.swing.JFrame {
     private void txtCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedulaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCedulaActionPerformed
+
+    private void jDateFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDateFechaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jDateFechaActionPerformed
     public void limpiarCajas() {
 
         txtCedula.setText("");
         txtNombre.setText("");
         txtApellido.setText("");
-        jDateFecha.setDate(null);
+             jDateFecha.setText("");
+        //jDateFecha.setDate(null);
         cbSexo.setSelectedItem(null);
         txtDireccion.setText("");
         txtNacionalidad.setText("");
@@ -434,7 +444,8 @@ public class Frm_registro_personal_medico extends javax.swing.JFrame {
             pst.setString(1, txtCedula.getText());
             pst.setString(2, txtNombre.getText());
             pst.setString(3, txtApellido.getText());
-            pst.setString(4, ((JTextField) jDateFecha.getDateEditor().getUiComponent()).getText());
+            pst.setString(4, jDateFecha.getText());
+            //pst.setString(4, ((JTextField) jDateFecha.getDateEditor().getUiComponent()).getText());
             int seleccionado = cbSexo.getSelectedIndex();
             pst.setString(5, cbSexo.getItemAt(seleccionado));
             pst.setString(6, txtDireccion.getText());
@@ -459,7 +470,8 @@ public class Frm_registro_personal_medico extends javax.swing.JFrame {
 
             pst.setString(1, txtNombre.getText());
             pst.setString(2, txtApellido.getText());
-            pst.setString(3, ((JTextField) jDateFecha.getDateEditor().getUiComponent()).getText());
+             pst.setString(3, jDateFecha.getText());
+           // pst.setString(3, ((JTextField) jDateFecha.getDateEditor().getUiComponent()).getText());
             int seleccionado = cbSexo.getSelectedIndex();
             pst.setString(4, cbSexo.getItemAt(seleccionado));
             pst.setString(5, txtDireccion.getText());
@@ -533,7 +545,7 @@ public class Frm_registro_personal_medico extends javax.swing.JFrame {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JComboBox<String> cbSexo;
-    private com.toedter.calendar.JDateChooser jDateFecha;
+    private javax.swing.JTextField jDateFecha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
