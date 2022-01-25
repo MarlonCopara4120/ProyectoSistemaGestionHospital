@@ -53,7 +53,6 @@ public class Frm_cita_medica extends javax.swing.JFrame {
         lblNombres = new javax.swing.JLabel();
         txtTelefono = new javax.swing.JTextField();
         txtCorreo = new javax.swing.JTextField();
-        dateFechaCita = new com.toedter.calendar.JDateChooser();
         jLabel12 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         btnEliminar = new javax.swing.JButton();
@@ -69,6 +68,7 @@ public class Frm_cita_medica extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCitaM = new javax.swing.JTable();
         btnRegresar = new javax.swing.JButton();
+        dateFechaCita = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 51, 255));
@@ -303,16 +303,16 @@ public class Frm_cita_medica extends javax.swing.JFrame {
                         .addComponent(jLabel5)
                         .addGap(61, 61, 61)))
                 .addGap(40, 40, 40)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(dateFechaCita, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txyHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtMedicoAsignado, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txyHorario, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+                    .addComponent(txtCedula, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+                    .addComponent(txtMedicoAsignado, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+                    .addComponent(txtApellido, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+                    .addComponent(txtTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+                    .addComponent(txtCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+                    .addComponent(txtDireccion, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+                    .addComponent(dateFechaCita))
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -366,7 +366,7 @@ public class Frm_cita_medica extends javax.swing.JFrame {
                             .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5))
                         .addGap(13, 13, 13)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
                             .addComponent(dateFechaCita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
@@ -409,7 +409,8 @@ public class Frm_cita_medica extends javax.swing.JFrame {
         txtTelefono.setText(tblCitaM.getValueAt(filaSeleccionada, 3).toString());
         txtCorreo.setText(tblCitaM.getValueAt(filaSeleccionada, 4).toString());
         txtDireccion.setText(tblCitaM.getValueAt(filaSeleccionada, 5).toString());
-        ((JTextField) dateFechaCita.getDateEditor().getUiComponent()).setText((String) tblCitaM.getValueAt(filaSeleccionada, 6).toString());
+       dateFechaCita.setText(tblCitaM.getValueAt(filaSeleccionada, 6).toString());
+        //((JTextField) dateFechaCita.getDateEditor().getUiComponent()).setText((String) tblCitaM.getValueAt(filaSeleccionada, 6).toString());
         txyHorario.setText(tblCitaM.getValueAt(filaSeleccionada, 7).toString());
         txtMedicoAsignado.setText(tblCitaM.getValueAt(filaSeleccionada, 8).toString());
     }//GEN-LAST:event_tblCitaMMouseClicked
@@ -474,8 +475,8 @@ public class Frm_cita_medica extends javax.swing.JFrame {
         txtTelefono.setText("");
         txtCorreo.setText("");
         txtDireccion.setText("");
-
-        dateFechaCita.setDate(null);
+dateFechaCita.setText("");
+//        dateFechaCita.setDate(null);
 
         txyHorario.setText("");
         txtMedicoAsignado.setText("");
@@ -561,7 +562,8 @@ public class Frm_cita_medica extends javax.swing.JFrame {
             pst.setString(4, txtDireccion.getText());
             pst.setString(5, txtTelefono.getText());
             pst.setString(6, txtCorreo.getText());
-            pst.setString(7, ((JTextField) dateFechaCita.getDateEditor().getUiComponent()).getText());
+          pst.setString(7, dateFechaCita.getText());   
+           // pst.setString(7, ((JTextField) dateFechaCita.getDateEditor().getUiComponent()).getText());
             pst.setString(8, txyHorario.getText());
             pst.setString(9, txtMedicoAsignado.getText());
 
@@ -585,7 +587,8 @@ public class Frm_cita_medica extends javax.swing.JFrame {
             pst.setString(3, txtTelefono.getText());
             pst.setString(4, txtDireccion.getText());
             pst.setString(5, txtCorreo.getText());
-            pst.setString(6, ((JTextField) dateFechaCita.getDateEditor().getUiComponent()).getText());
+               pst.setString(6, dateFechaCita.getText());
+           // pst.setString(6, ((JTextField) dateFechaCita.getDateEditor().getUiComponent()).getText());
 
             pst.setString(7, txyHorario.getText());
             pst.setString(8, txtMedicoAsignado.getText());
@@ -664,7 +667,7 @@ public class Frm_cita_medica extends javax.swing.JFrame {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnRegresar;
-    private com.toedter.calendar.JDateChooser dateFechaCita;
+    private javax.swing.JTextField dateFechaCita;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
