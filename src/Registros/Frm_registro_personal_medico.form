@@ -86,7 +86,8 @@
                                           <Component id="txtCedula" alignment="0" min="-2" pref="204" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="315" max="-2" attributes="0"/>
+                                          <Component id="jDateFecha" min="-2" pref="204" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="111" max="-2" attributes="0"/>
                                           <Component id="btnGuardar" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
@@ -95,7 +96,6 @@
                                           <Component id="btnActualizar" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <Component id="txtNacionalidad" alignment="0" min="-2" pref="204" max="-2" attributes="0"/>
-                                      <Component id="jDateFecha" alignment="0" min="-2" pref="204" max="-2" attributes="0"/>
                                       <Component id="txtExperienciaLaboral" min="-2" pref="204" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -174,10 +174,10 @@
                           <Component id="btnGuardar" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="jDateFecha" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jDateFecha" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -305,11 +305,6 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtApellido">
         </Component>
-        <Component class="com.toedter.calendar.JDateChooser" name="jDateFecha">
-          <Properties>
-            <Property name="dateFormatString" type="java.lang.String" value="yyyy/MM/dd"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JComboBox" name="cbSexo">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
@@ -420,6 +415,11 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jDateFecha">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jDateFechaActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
